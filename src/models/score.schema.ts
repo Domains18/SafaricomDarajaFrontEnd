@@ -33,3 +33,7 @@ export class Score extends Document implements IScore{
     })
     createdAt?: Date
 }
+
+
+export const scoreSchema = SchemaFactory.createForClass(Score);
+scoreSchema.index({ user: 1, score: 1 }, { unique: true})
