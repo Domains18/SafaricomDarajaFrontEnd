@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { Model } from 'mongoose'
 import { Score } from "src/models/score.schema";
-import { createScoreRequestsDto } from "src/types/dto/scores/createScoreDto";
+import { createScoreRequestsDto, createScoreResponseDto } from "src/types/dto/scores/createScoreDto";
 import { InjectModel } from "@nestjs/mongoose";
 import { IUser } from "src/types/interfaces/user";
 import { IScore } from "src/types/interfaces/score";
@@ -35,6 +35,20 @@ export class ScoreService {
             collection: result
         }
     }
-    
+    async create(score: createScoreRequestsDto): Promise<createScoreResponseDto> {
+        try {
+            const newScore = await this.userModel.create(score);
+            await newScore.save();
+            return await newScore.populate({
+                path: 'user',
+                select: '-password -createdAt'
+            });
+        } catch (error) {
+            throw new ConflictException(
+                `Score '${score}'  already exists`
+            );
+        }
+    }
+
 
 }
