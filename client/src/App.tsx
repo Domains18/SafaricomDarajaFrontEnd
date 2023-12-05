@@ -7,7 +7,7 @@ function App() {
   const [amount, setAmount] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [transactionDetails, setTransactionDetails ] = useState(null)
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
   };
@@ -20,11 +20,7 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsLoading(false);
-
-    console.log("Submitted:", phoneNumber, amount);
+    await axios.post
   };
 
   return (
