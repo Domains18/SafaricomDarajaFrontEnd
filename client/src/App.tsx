@@ -7,7 +7,8 @@ function App() {
   const [amount, setAmount] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [transactionDetails, setTransactionDetails ] = useState(null)
+  const [transactionDetails, setTransactionDetails] = useState(null)
+  
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
   };
@@ -20,7 +21,7 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
 
-    await axios.post
+    await axios.post('http://localhost:5000/api/stkpush', )
   };
 
   return (
