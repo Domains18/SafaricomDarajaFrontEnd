@@ -20,8 +20,11 @@ function App() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
-    await axios.post('http://localhost:5000/api/stkpush', )
+    const data = {
+      phone: phoneNumber,
+      amount: amount
+    }
+    await axios.post('http://localhost:5000/api/stkpush', data )
   };
 
   return (
