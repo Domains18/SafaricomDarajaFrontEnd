@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-
-
 function App() {
   const [amount, setAmount] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [transactionDetails, setTransactionDetails] = useState(null)
-  
+  const [transactionDetails, setTransactionDetails] = useState(null);
+  const [validateTransaction, isValidated] = useState(false);
+
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(e.target.value);
   };
@@ -20,11 +19,11 @@ function App() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const data = {
+    const payload = {
       phone: phoneNumber,
-      amount: amount
-    }
-    await axios.post('http://localhost:5000/api/stkpush', data )
+      amount: amount,
+    };
+    await axios.post("http://localhost:5000/api/stkpush", payload);
   };
 
   return (
