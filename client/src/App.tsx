@@ -7,8 +7,7 @@ function App() {
     const [amount, setAmount] = useState<string>("");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [transactionDetails, setTransactionDetails] = useState(null);
-    const [validateTransaction, isValidated] = useState(false);
+    // const [transactionDetails, setTransactionDetails] = useState<any>([]);
 
     const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPhoneNumber(e.target.value);
@@ -18,39 +17,6 @@ function App() {
         setAmount(e.target.value);
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-        const payload = {
-            phoneNumber: phoneNumber,
-            amount: amount,
-        };
-        await axios.post("http://localhost:5000/api/stkpush", payload)
-            .then((res) => {
-                setTransactionDetails(res.data);
-                setIsLoading(false);
-                console.log(res.data);
-                // validateTransactionDetails(res.data);
-            })
-            .catch((err) => {
-                MpesaStkPushFailed();
-                setIsLoading(false);
-            });
-    };
-    const validateTransactionDetails = async (data: any) => {
-        setIsLoading(true);
-        const payload = {
-            CheckoutRequestID: data.CheckoutRequestID,
-            MerchantRequestID: data.MerchantRequestID,
-            ResultCode: data.ResultCode,
-            ResultDesc: data.ResultDesc,
-            Amount: data.Amount,
-            MpesaReceiptNumber: data.MpesaReceiptNumber,
-            TransactionDate: data.TransactionDate,
-            PhoneNumber: data.PhoneNumber,
-        };
-        console.log(payload);
-    }
     const MpesaStkPushSubmitted = () => toast("Mpesa Stk Push Submitted Successfully, Enter your Pin to complete the transaction", {
         position: "top-center",
         autoClose: 2000,
@@ -59,13 +25,80 @@ function App() {
         pauseOnHover: false,
     });
     const MpesaStkPushSuccess = () => toast.info("Mpesa Stk Push Success, transaction completed successfully");
-    const MpesaStkPushFailed = () => toast.error("Mpesa Stk Push Failed, please try again", {
+    const MpesaStkPushFailed = () => toast.error("Mpesa Stk Push Failed, Please try again",{
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
     });
+    const StkPushCancelledByUser= () => toast.error("StkPush was rejected by the user",{
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+    });
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+        try {
+            const {data} = await axios.post(
+                "http://localhost:5000/api//stkpush",
+                {
+                    phone: phoneNumber,
+                    amount: amount,
+                }
+            );
+            // setTransactionDetails(data);
+            console.log(data);
+            setIsLoading(false);
+            MpesaStkPushSuccess();
+            await validateTransaction(data);
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+            MpesaStkPushFailed();
+        }
+    };
+    const validateTransaction = async (payload: any) => {
+        //recursive function to check transaction status until data is returned
+        const checkStatus = async () => {
+            try {
+                const {data} = await axios.post(
+                    "http://localhost:5000/api/validate",
+                    {
+                        payload: {
+                            MerchantRequestID: payload.MerchantRequestID,
+                        }
+                    }
+                );
+                const transaction = data.transaction;
+                switch (transaction['ResultCode']) {
+                    case 0:
+                        console.log("Transaction Successful");
+                        MpesaStkPushSuccess();
+                        break;
+
+                    case 1032:
+                        console.log("Transaction cancelled by user");
+                        StkPushCancelledByUser();
+                        break;
+
+                    default:
+                        console.log("Transaction Failed");
+                        MpesaStkPushFailed();
+                        await checkStatus()
+                        break;
+                }
+            } catch (error) {
+                console.log(error);
+                MpesaStkPushFailed();
+            }
+        };
+        setTimeout(checkStatus, 10000);
+
+    }
     // @ts-ignore
     return (
         <div className="App bg-slate-700 h-screen text-white w-full">
