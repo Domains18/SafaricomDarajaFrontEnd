@@ -106,6 +106,17 @@ function App() {
           <q>Do you want to pay 3000 to account Reject Finance Bill 2024</q>
           Also call your MP. #RejectFinanceBilll2024 #RejectICTBill2024
         </p>
+        <br />
+        <p className="text-center border p-3 ">
+          The Finance Bill 2024 is a bill that seeks to amend various tax laws
+          in Kenya. The ICT Bill 2024 is a bill that seeks to regulate the ICT
+          sector in Kenya. Both bills have been criticized for being anti-people
+          and anti-technology. The campaign is calling on Kenyans to reject the
+          bills and demand better legislation that promotes innovation and
+          economic growth. To learn more about finance Bill 2024 and how it
+          affects you, visit this chatbot link
+          <a href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt" className="text-red-900 bg-white px-9 ">Chat here</a>
+        </p>
       </div>
     </div>
   );
