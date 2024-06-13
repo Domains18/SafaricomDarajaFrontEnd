@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [amount] = useState<string>("1");
@@ -115,8 +116,15 @@ function App() {
           bills and demand better legislation that promotes innovation and
           economic growth. To learn more about finance Bill 2024 and how it
           affects you, visit this chatbot link
-          <a href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt" target="_blank" className="text-red-900 bg-white px-9 ">Chat here</a>
+          <a
+            href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt"
+            target="_blank"
+            className="text-red-900 bg-white px-9 "
+          >
+            Chat here
+          </a>
         </p>
+        < Analytics />
       </div>
     </div>
   );
