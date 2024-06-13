@@ -65,7 +65,7 @@ function App() {
         #RejectICTBill2024
       </h1>
       <div className="w-full max-w-md">
-        <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+        {/* <form className="flex flex-col items-center" onSubmit={handleSubmit}>
           <input
             className="border-2 border-gray-500 rounded-md p-2 m-2 text-black w-full"
             type="text"
@@ -97,7 +97,10 @@ function App() {
               <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white"></div>
             </div>
           )}
-        </form>
+        </form> */}
+        <p className="text-center border p-3 ">
+          Being such a sensitive issue, I have had to disable the form. The struggle continues. #RejectFinanceBilll2024 #RejectICTBill2024. You can still call your MP. #RejectFinanceBilll2024 #RejectICTBill2024
+        </p>
       </div>
       <div className="mt-8 lg:w-1/2">
         <p className="text-center border p-3 ">
