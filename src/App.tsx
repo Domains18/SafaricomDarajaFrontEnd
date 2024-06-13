@@ -63,7 +63,7 @@ function App() {
           )}
         </form> */}
         <p className="text-center border p-3 ">
-          Server OverLoad, As I work on the server, The struggle continues. #RejectFinanceBilll2024 #RejectICTBill2024. You can still call your MP. #RejectFinanceBilll2024 #RejectICTBill2024
+          Being such a sensitive issue, I have had to disable the form. The struggle continues. #RejectFinanceBilll2024 #RejectICTBill2024. You can still call your MP. #RejectFinanceBilll2024 #RejectICTBill2024
         </p>
       </div>
       <div className="mt-8 lg:w-1/2">
