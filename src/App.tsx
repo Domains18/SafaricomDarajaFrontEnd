@@ -104,7 +104,7 @@ function App() {
           Hey there patriot, you know it is hard when tech bros are becoming
           activists. This will initiate a Stk Push Request to your MP number
           with the message{" "}
-          <q>Do you want to pay 3000 to account Reject Finance Bill 2024</q>
+          <q>Do you want to pay 1 to account Reject Finance Bill 2024</q>
           Also call your MP. #RejectFinanceBilll2024 #RejectICTBill2024
         </p>
         <br />
