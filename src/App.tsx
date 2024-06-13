@@ -1,60 +1,24 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
 
 function App() {
-  const [amount] = useState<string>("1");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const MpesaStkPushSubmitted = () =>
-    toast(
-      "Mpesa Stk Push Submitted Successfully, Your MP has received the notification",
-      {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-      }
-    );
-
-  const MpesaStkPushSuccess = () =>
-    toast.info(
-      "Thank you for participating in the campaign, Your Voice Matters"
-    );
-
-  const MpesaStkPushFailed = () =>
-    toast.error("Mpesa Stk Push Failed, Please recheck your number", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-    });
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      await axios.post("https://nodejsdaraja.onrender.com/api/stkpush", {
-        phone: phoneNumber,
-        amount: 1,
-      });
-      setIsLoading(false);
-      MpesaStkPushSuccess();
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-      MpesaStkPushFailed();
-    }
-  };
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   try {
+  //     await axios.post("https://nodejsdaraja.onrender.com/api/stkpush", {
+  //       phone: phoneNumber,
+  //       amount: 1,
+  //     });
+  //     setIsLoading(false);
+  //     MpesaStkPushSuccess();
+  //   } catch (error) {
+  //     console.log(error);
+  //     setIsLoading(false);
+  //     MpesaStkPushFailed();
+  //   }
+  // };
 
   return (
     <div className="App bg-slate-700 min-h-screen text-white flex flex-col items-center justify-center px-4 py-8">
