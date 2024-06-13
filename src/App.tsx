@@ -115,7 +115,7 @@ function App() {
           bills and demand better legislation that promotes innovation and
           economic growth. To learn more about finance Bill 2024 and how it
           affects you, visit this chatbot link
-          <a href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt" className="text-red-900 bg-white px-9 ">Chat here</a>
+          <a href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt" target="_blank" className="text-red-900 bg-white px-9 ">Chat here</a>
         </p>
       </div>
     </div>
